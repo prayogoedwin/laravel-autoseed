@@ -15,9 +15,7 @@
         }
     ],
     "minimum-stability": "stable",
-    "require": {
-        "illuminate/database": "^8.0"
-    },
+    "require": {},
     "scripts": {
         "post-autoload-dump": [
             "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
@@ -27,10 +25,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "Astamatech\\LaravelAutoseed\\YourServiceProvider"
+                "Astamatech\\LaravelAutoseed\\LaravelAutoseedServiceProvider"
             ],
             "commands": [
-                "Astamatech\\LaravelAutoseed\\TableSeeder"
+                "Astamatech\\LaravelAutoseed\\Autoseed"
             ]
         }
     }

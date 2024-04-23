@@ -2,78 +2,32 @@
 
 namespace Astamatech\LaravelAutoseed;
 
-use Illuminate\Console\Command;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
-use Symfony\Component\Console\Input\InputOption;
 
 class AutoSeed extends Seeder
 {
     /**
-     * The name and signature of the console command.
-     *
-     * @var string
-     */
-    protected $name = 'db:seed-table';
-
-    /**
-     * The console command description.
-     *
-     * @var string
-     */
-    protected $description = 'Seed data from a specified table';
-
-    /**
-     * Create a new command instance.
+     * Run the database seeds.
      *
      * @return void
      */
-    public function __construct()
+    public function run()
     {
-        parent::__construct();
-    }
+        $tableName = $this->ask('Please specify the name of the table to seed');
 
-    /**
-     * Execute the console command.
-     *
-     * @return int
-     */
-    public function handle()
-    {
-        $tableName = $this->option('table');
-        
-        if (!$tableName) {
-            $this->error('Please specify the name of the table using the --table option.');
-            return 1;
-        }
-        
         if (!DB::table($tableName)->exists()) {
-            $this->error("Table '{$tableName}' does not exist.");
-            return 1;
+            $this->command->error("Table '{$tableName}' does not exist.");
+            return;
         }
 
         $data = DB::table($tableName)->get()->toArray();
 
+        // Ganti 'ModelName' dengan nama model yang sesuai dengan tabel Anda
         foreach ($data as $row) {
             \App\Models\ModelName::create((array) $row);
         }
 
-        $this->info("Data seeded from '{$tableName}' table successfully.");
-
-        return 0;
-    }
-
-    /**
-     * Get the console command options.
-     *
-     * @return array
-     */
-    protected function getOptions()
-    {
-        return [
-            ['table', null, InputOption::VALUE_REQUIRED, 'The name of the table to seed'],
-        ];
+        $this->command->info("Data seeded from '{$tableName}' table successfully.");
     }
 }
-
-?>
