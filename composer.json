@@ -1,0 +1,37 @@
+{
+    "name": "astamatech/laravel-autoseed",
+    "description": "A tool for retrieving data from a table in a database and inputting it into a seeder file in a Laravel-based application. The goal is to make it easier for developers to create seeders so they don't write manually.",
+    "type": "library",
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Astamatech\\LaravelAutoseed\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "AstamaTech",
+            "email": "astama.tech@gmail.com"
+        }
+    ],
+    "minimum-stability": "stable",
+    "require": {
+        "illuminate/database": "^8.0"
+    },
+    "scripts": {
+        "post-autoload-dump": [
+            "Illuminate\\Foundation\\ComposerScripts::postAutoloadDump",
+            "@php artisan package:discover --ansi"
+        ]
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Astamatech\\LaravelAutoseed\\YourServiceProvider"
+            ],
+            "commands": [
+                "Astamatech\\LaravelAutoseed\\TableSeeder"
+            ]
+        }
+    }
+}
