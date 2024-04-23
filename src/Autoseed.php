@@ -6,7 +6,7 @@ use Illuminate\Console\Command;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class AutoSeed extends Seeder
+class Autoseed extends Seeder
 {
     /**
      * The name and signature of the console command.
